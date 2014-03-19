@@ -1,0 +1,28 @@
+{
+  "name": "yafu",
+  "version": "0.0.1",
+  "authors": [
+    "Luc-pascal Ceccaldi <lpceccaldi@af83.com>"
+  ],
+  "description": "uploader polyfill",
+  "main": "xhr.js",
+  "keywords": [
+    "?"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery-file-upload": "~9.5.7",
+    "jquery": "~2.1.0",
+    "lodash": "~2.4.1"
+  },
+  "scripts": {
+    "test": "grunt"
+  }
+}

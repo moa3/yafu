@@ -1,0 +1,29 @@
+{
+  "name": "yafu",
+  "version": "0.0.1",
+  "description": "uploader polyfill",
+  "main": "xhr.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "chai": "~1.9.0",
+    "grunt": "~0.4.4",
+    "grunt-bower-task": "~0.3.4",
+    "grunt-coffeelint": "~0.0.8",
+    "grunt-contrib-coffee": "~0.10.1",
+    "grunt-contrib-jshint": "~0.9.2",
+    "grunt-contrib-watch": "~0.6.0",
+    "grunt-mocha": "~0.4.10",
+    "sinon": "~1.9.0",
+    "sinon-chai": "~2.5.0"
+  },
+  "devDependencies": {
+    "mocha": "~1.18.2"
+  },
+  "scripts": {
+    "test": "grunt"
+  },
+  "author": "moa3",
+  "license": "MIT"
+}
