@@ -1,6 +1,8 @@
 YAFU stands for Yet Another File Uploader
 ==============
 
+[![Build Status](https://travis-ci.org/moa3/yafu.png)](https://travis-ci.org/moa3/yafu)
+
 ## Usage
 
   bower install moa3/yafu
