@@ -20,6 +20,9 @@
     XHR.prototype.send = function(files) {
       var deferred, options;
       deferred = $.Deferred();
+      if (_(files).isEmpty()) {
+        return deferred;
+      }
       options = _(this.options).extend(this.dataOptions(files, deferred));
       $.ajax(options);
       return deferred;

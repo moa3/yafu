@@ -15,6 +15,7 @@ class @YAFU.XHR
 
   send: (files) ->
     deferred = $.Deferred()
+    return deferred if _(files).isEmpty()
     options = _(@options).extend @dataOptions(files, deferred)
     $.ajax(options)
     deferred
