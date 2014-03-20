@@ -53,7 +53,7 @@
       $.cleanData(this.$fileInput.unbind("remove"));
       old = this.$fileInput[0];
       this.$fileInput.off();
-      this.fileInput = inputClone;
+      this.fileInput = inputClone[0];
       this.initInput();
       return old;
     };

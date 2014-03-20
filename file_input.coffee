@@ -47,6 +47,6 @@ class @YAFU.FileInput
     # Replace the original file input element in the fileInput
     old = @$fileInput[0]
     @$fileInput.off()
-    @fileInput = inputClone
+    @fileInput = inputClone[0]
     @initInput()
     old
