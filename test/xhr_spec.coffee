@@ -68,5 +68,5 @@ describe 'XHR', ->
 
     it 'calls $.ajax with options for iframe-transport', ->
       options = jQuery.ajax.args[0][0]
-      expect(options.dataType).to.eq "iframe json"
+      expect(options.dataType).to.eq "iframe text"
       expect(options).to.include.key 'fileInput'

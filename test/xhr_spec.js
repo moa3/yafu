@@ -106,7 +106,7 @@
       return it('calls $.ajax with options for iframe-transport', function() {
         var options;
         options = jQuery.ajax.args[0][0];
-        expect(options.dataType).to.eq("iframe json");
+        expect(options.dataType).to.eq("iframe text");
         return expect(options).to.include.key('fileInput');
       });
     });

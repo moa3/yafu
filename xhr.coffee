@@ -43,7 +43,7 @@ class @YAFU.XHR
 
   iframeOptions: (files, deferred)->
     options =
-      dataType: "iframe json"
+      dataType: "iframe #{@options.dataType}"
       fileInput: $ _(files).map (f) -> f.input
       success: deferred.resolve
       error: deferred.reject

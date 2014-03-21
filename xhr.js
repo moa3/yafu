@@ -61,7 +61,7 @@
     XHR.prototype.iframeOptions = function(files, deferred) {
       var options;
       return options = {
-        dataType: "iframe json",
+        dataType: "iframe " + this.options.dataType,
         fileInput: $(_(files).map(function(f) {
           return f.input;
         })),
