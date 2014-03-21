@@ -29,6 +29,7 @@ module.exports = (grunt)->
         files:
           'file_input.js': ['file_input.coffee']
           'xhr.js': ['xhr.coffee']
+          'exemple/exemple.js': ['exemple/exemple.coffee']
       test:
         files:
           'test/xhr_spec.js': ['test/xhr_spec.coffee']
@@ -40,7 +41,7 @@ module.exports = (grunt)->
       test:
         src: ['test/test.html']
     watch:
-      files: ['*.coffee', 'test/**/*.coffee']
+      files: ['*.coffee', 'test/**/*.coffee', 'exemple/**/*.coffee']
       tasks: ['coffeelint', 'coffee','mocha']
     bower:
       install:

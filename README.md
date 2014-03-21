@@ -9,6 +9,10 @@ yafu deps :
 
   jquery, [iframe-transport](https://raw.github.com/blueimp/jQuery-File-Upload/master/js/jquery.iframe-transport.js), underscorejs 
 
+### Exemple
+
+see exemple folder
+
 ## Credits
 
 Copyright (c) 2013 af83
