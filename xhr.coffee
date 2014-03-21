@@ -1,4 +1,3 @@
-#= require iframe-transport
 @YAFU ?= {}
 
 class @YAFU.XHR
