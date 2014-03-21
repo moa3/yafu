@@ -2,6 +2,10 @@
   "name": "yafu",
   "version": "0.0.1",
   "description": "uploader polyfill",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/moa3/yafu.git"
+  },
   "main": "xhr.js",
   "directories": {
     "test": "test"
