@@ -1,4 +1,4 @@
-YAFU stands for Yet Another File Uploader
+YAFU stands for Yet Another File Uploader [![Build Status](https://travis-ci.org/moa3/yafu.svg?branch=master)](https://travis-ci.org/moa3/yafu)
 ==============
 
 ## Usage
