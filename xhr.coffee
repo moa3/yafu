@@ -1,4 +1,16 @@
 @YAFU ?= {}
+(addXhrProgressEvent = ($) ->
+  originalXhr = $.ajaxSettings.xhr
+  $.ajaxSetup
+    xhr: ->
+      req = originalXhr()
+      if req.upload
+        if typeof req.upload.addEventListener is "function"
+          req.upload.addEventListener "progress", ((evt) =>
+            @progressUpload? evt
+          ), false
+      req
+) jQuery
 
 class @YAFU.XHR
 
@@ -36,9 +48,8 @@ class @YAFU.XHR
       contentType: no
       success: deferred.resolve
       error: deferred.reject
-      xhrFields:
-        onprogress: (e) ->
-          deferred.notify(e)
+      progressUpload: (e)->
+        deferred.notify(e) if e.lengthComputable
 
   iframeOptions: (files, deferred)->
     options =

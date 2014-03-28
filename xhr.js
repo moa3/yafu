@@ -1,7 +1,30 @@
 (function() {
+  var addXhrProgressEvent;
+
   if (this.YAFU == null) {
     this.YAFU = {};
   }
+
+  (addXhrProgressEvent = function($) {
+    var originalXhr;
+    originalXhr = $.ajaxSettings.xhr;
+    return $.ajaxSetup({
+      xhr: function() {
+        var req;
+        req = originalXhr();
+        if (req.upload) {
+          if (typeof req.upload.addEventListener === "function") {
+            req.upload.addEventListener("progress", ((function(_this) {
+              return function(evt) {
+                return typeof _this.progressUpload === "function" ? _this.progressUpload(evt) : void 0;
+              };
+            })(this)), false);
+          }
+        }
+        return req;
+      }
+    });
+  })(jQuery);
 
   this.YAFU.XHR = (function() {
     XHR.prototype["default"] = {
@@ -50,8 +73,8 @@
         contentType: false,
         success: deferred.resolve,
         error: deferred.reject,
-        xhrFields: {
-          onprogress: function(e) {
+        progressUpload: function(e) {
+          if (e.lengthComputable) {
             return deferred.notify(e);
           }
         }
