@@ -43,12 +43,19 @@
     XHR.prototype.send = function(files) {
       var deferred, options;
       deferred = $.Deferred();
-      if (_(files).isEmpty()) {
+      if (!this.isValidFile(files)) {
         return deferred;
       }
       options = _(this.options).extend(this.dataOptions(files, deferred));
       $.ajax(options);
       return deferred;
+    };
+
+    XHR.prototype.isValidFile = function(files) {
+      var isAFile, isFilledArray;
+      isFilledArray = _(files).isArray() && !_(files).isEmpty();
+      isAFile = files instanceof window.Blob || files instanceof window.File;
+      return isFilledArray || isAFile;
     };
 
     XHR.prototype.dataOptions = function(files, deferred) {
@@ -65,7 +72,9 @@
       formData = new FormData();
       for (_i = 0, _len = files.length; _i < _len; _i++) {
         file = files[_i];
-        formData.append(this.options.paramName, file, file.uploadName || file.name);
+        if (file instanceof File) {
+          formData.append(this.options.paramName, file, file.uploadName || file.name);
+        }
       }
       return options = {
         data: formData,
