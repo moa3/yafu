@@ -15,10 +15,15 @@ class @YAFU.XHR
 
   send: (files) ->
     deferred = $.Deferred()
-    return deferred if _(files).isEmpty()
+    return deferred unless @isValidFile files
     options = _(@options).extend @dataOptions(files, deferred)
     $.ajax(options)
     deferred
+
+  isValidFile: (files)->
+    isFilledArray = _(files).isArray() and not _(files).isEmpty()
+    isAFile = files instanceof window.Blob || files instanceof window.File
+    isFilledArray or isAFile
 
   dataOptions: (files, deferred) ->
     files = if _(files).isArray() then files else [files]
@@ -29,7 +34,7 @@ class @YAFU.XHR
 
   XHROptions: (files, deferred)->
     formData = new FormData()
-    for file in files
+    for file in files when file instanceof File
       formData.append @options.paramName, file, file.uploadName or file.name
     options =
       data: formData
