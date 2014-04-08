@@ -38,7 +38,7 @@ class @YAFU.XHR
       formData.append @options.paramName, file, file.uploadName or file.name
     for data in datas
       for name, value of data
-        formData.append name, value
+        formData.append "#{paramName}[#{name}]", value
     options =
       data: formData
       processData: no
