@@ -60,7 +60,7 @@
         data = datas[_j];
         for (name in data) {
           value = data[name];
-          formData.append("" + paramName + "[" + name + "]", value);
+          formData.append("" + this.options.paramName + "[" + name + "]", value);
         }
       }
       return options = {
