@@ -17,13 +17,16 @@
       this.promises = [];
     }
 
-    XHR.prototype.send = function(files) {
+    XHR.prototype.send = function(files, datas) {
       var deferred, options;
+      if (datas == null) {
+        datas = [];
+      }
       deferred = $.Deferred();
       if (!this.isValidFile(files)) {
         return deferred;
       }
-      options = _(this.options).extend(this.dataOptions(files, deferred));
+      options = _(this.options).extend(this.dataOptions(files, datas, deferred));
       $.ajax(options);
       return deferred;
     };
@@ -35,22 +38,29 @@
       return isFilledArray || isAFile;
     };
 
-    XHR.prototype.dataOptions = function(files, deferred) {
+    XHR.prototype.dataOptions = function(files, datas, deferred) {
       files = _(files).isArray() ? files : [files];
       if (_(files[0]).has('input')) {
         return this.iframeOptions(files, deferred);
       } else {
-        return this.XHROptions(files, deferred);
+        return this.XHROptions(files, datas, deferred);
       }
     };
 
-    XHR.prototype.XHROptions = function(files, deferred) {
-      var file, formData, options, _i, _len;
+    XHR.prototype.XHROptions = function(files, datas, deferred) {
+      var data, file, formData, name, options, value, _i, _j, _len, _len1;
       formData = new FormData();
       for (_i = 0, _len = files.length; _i < _len; _i++) {
         file = files[_i];
         if (file instanceof File) {
           formData.append(this.options.paramName, file, file.uploadName || file.name);
+        }
+      }
+      for (_j = 0, _len1 = datas.length; _j < _len1; _j++) {
+        data = datas[_j];
+        for (name in data) {
+          value = data[name];
+          formData.append(name, value);
         }
       }
       return options = {
