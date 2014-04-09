@@ -33,7 +33,9 @@ class @YAFU.XHR
 
   isValidFile: (files)->
     isFilledArray = _(files).isArray() and not _(files).isEmpty()
-    isAFile = files instanceof window.Blob || files instanceof window.File
+    isAFile = (window.Blob? and files instanceof window.Blob) or
+      (window.File? and files instanceof window.File) or
+      files?.input
     isFilledArray or isAFile
 
   dataOptions: (files, datas, deferred) ->
