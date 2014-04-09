@@ -27,17 +27,18 @@
   })(jQuery);
 
   this.YAFU.XHR = (function() {
-    XHR.prototype["default"] = {
-      url: "/",
-      paramName: "file",
-      type: "POST",
-      dataType: "json"
+    XHR.prototype["default"] = function() {
+      return {
+        url: "/",
+        paramName: "file",
+        type: "POST",
+        dataType: "json"
+      };
     };
 
     function XHR(options) {
       this.options = options;
-      this.options = _(this["default"]).extend(this.options);
-      this.promises = [];
+      this.options = _(this["default"]()).extend(this.options);
     }
 
     XHR.prototype.send = function(files, datas) {
@@ -46,23 +47,23 @@
         datas = [];
       }
       deferred = $.Deferred();
-      if (!this.isValidFile(files)) {
+      files = _(files).isArray() ? files : [files];
+      if (!this.isValidFiles(files)) {
         return deferred;
       }
-      options = _(this.options).extend(this.dataOptions(files, datas, deferred));
+      options = _(_(this.options).clone()).extend(this.dataOptions(files, datas, deferred));
       $.ajax(options);
       return deferred;
     };
 
-    XHR.prototype.isValidFile = function(files) {
-      var isAFile, isFilledArray;
-      isFilledArray = _(files).isArray() && !_(files).isEmpty();
-      isAFile = files instanceof window.Blob || files instanceof window.File;
-      return isFilledArray || isAFile;
+    XHR.prototype.isValidFiles = function(files) {
+      if (_(files).isEmpty()) {
+        return false;
+      }
+      return files[0] instanceof window.Blob || files[0] instanceof window.File || (_(files[0]).has('input') && files[0].input instanceof HTMLInputElement);
     };
 
     XHR.prototype.dataOptions = function(files, datas, deferred) {
-      files = _(files).isArray() ? files : [files];
       if (_(files[0]).has('input')) {
         return this.iframeOptions(files, deferred);
       } else {

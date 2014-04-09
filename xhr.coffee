@@ -14,30 +14,30 @@
 
 class @YAFU.XHR
 
-  default:
+  default: ->
     url: "/"
     paramName: "file"
     type: "POST"
     dataType: "json"
 
   constructor: (@options)->
-    @options = _(@default).extend @options
-    @promises = []
+    @options = _(@default()).extend @options
 
   send: (files, datas=[]) ->
     deferred = $.Deferred()
-    return deferred unless @isValidFile files
-    options = _(@options).extend @dataOptions(files, datas, deferred)
+    files = if _(files).isArray() then files else [files]
+    return deferred unless @isValidFiles files
+    options = _(_(@options).clone()).extend @dataOptions(files, datas, deferred)
     $.ajax(options)
     deferred
 
-  isValidFile: (files)->
-    isFilledArray = _(files).isArray() and not _(files).isEmpty()
-    isAFile = files instanceof window.Blob || files instanceof window.File
-    isFilledArray or isAFile
+  isValidFiles: (files)->
+    return no if _(files).isEmpty()
+    files[0] instanceof window.Blob or
+    files[0] instanceof window.File or
+    (_(files[0]).has('input') and files[0].input instanceof HTMLInputElement)
 
   dataOptions: (files, datas, deferred) ->
-    files = if _(files).isArray() then files else [files]
     if _(files[0]).has 'input' #this is an iframe upload
       @iframeOptions files, deferred
     else
