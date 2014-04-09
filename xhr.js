@@ -57,7 +57,7 @@
     XHR.prototype.isValidFile = function(files) {
       var isAFile, isFilledArray;
       isFilledArray = _(files).isArray() && !_(files).isEmpty();
-      isAFile = ((window.Blob != null) && files instanceof window.Blob) || ((window.File != null) && files instanceof window.File) || (files != null ? files.input : void 0);
+      isAFile = files instanceof window.Blob || files instanceof window.File;
       return isFilledArray || isAFile;
     };
 
