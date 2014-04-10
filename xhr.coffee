@@ -33,8 +33,8 @@ class @YAFU.XHR
 
   isValidFiles: (files)->
     return no if _(files).isEmpty()
-    files[0] instanceof window.Blob or
-    files[0] instanceof window.File or
+    (window.Blob? and files[0] instanceof window.Blob) or
+    (window.File? and files[0] instanceof window.File) or
     (_(files[0]).has('input') and files[0].input instanceof HTMLInputElement)
 
   dataOptions: (files, datas, deferred) ->

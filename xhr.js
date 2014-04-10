@@ -60,7 +60,7 @@
       if (_(files).isEmpty()) {
         return false;
       }
-      return files[0] instanceof window.Blob || files[0] instanceof window.File || (_(files[0]).has('input') && files[0].input instanceof HTMLInputElement);
+      return ((window.Blob != null) && files[0] instanceof window.Blob) || ((window.File != null) && files[0] instanceof window.File) || (_(files[0]).has('input') && files[0].input instanceof HTMLInputElement);
     };
 
     XHR.prototype.dataOptions = function(files, datas, deferred) {
