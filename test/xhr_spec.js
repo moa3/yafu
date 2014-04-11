@@ -1,43 +1,4 @@
 (function() {
-  this.base64toBlob = function(base64Data, contentType) {
-    var begin, byteArrays, byteCharacters, bytes, bytesLength, end, i, offset, sliceIndex, sliceSize, slicesCount;
-    if (contentType == null) {
-      contentType = 'image/png';
-    }
-    contentType = contentType || "";
-    sliceSize = 1024;
-    byteCharacters = atob(base64Data);
-    bytesLength = byteCharacters.length;
-    slicesCount = Math.ceil(bytesLength / sliceSize);
-    byteArrays = new Array(slicesCount);
-    sliceIndex = 0;
-    while (sliceIndex < slicesCount) {
-      begin = sliceIndex * sliceSize;
-      end = Math.min(begin + sliceSize, bytesLength);
-      bytes = new Array(end - begin);
-      offset = begin;
-      i = 0;
-      while (offset < end) {
-        bytes[i] = byteCharacters[offset].charCodeAt(0);
-        ++i;
-        ++offset;
-      }
-      byteArrays[sliceIndex] = new Uint8Array(bytes);
-      ++sliceIndex;
-    }
-    return new Blob(byteArrays, {
-      type: contentType
-    });
-  };
-
-  this.blob1 = base64toBlob('iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==');
-
-  this.blob1.name = "file1.jpg";
-
-  this.blob2 = base64toBlob('R0lGODlhCwALAIAAAAAA3pn/ZiH5BAEAAAEALAAAAAALAAsAAAIUhA+hkcuO4lmNVindo7qyrIXiGBYAOw==');
-
-  this.blob2.name = "file2.jpg";
-
   describe('XHR', function() {
     beforeEach(function() {
       var $input;
@@ -91,55 +52,68 @@
       });
     });
     describe('options', function() {
-      return it('calls $.ajax with given options', function() {
-        var key, options, opts, value, _results;
-        this.files = [blob1, blob2];
-        sinon.stub(jQuery, "prop", (function(_this) {
-          return function() {
-            return _this.files;
+      if (typeof Blob === 'function') {
+        return it('calls $.ajax with given options', function() {
+          var blob1, blob2, key, options, opts, value, _results;
+          blob1 = new Blob;
+          blob1.name = "file1.jpg";
+          blob2 = new Blob;
+          blob2.name = "file2.jpg";
+          this.files = [blob1, blob2];
+          sinon.stub(jQuery, "prop", (function(_this) {
+            return function() {
+              return _this.files;
+            };
+          })(this));
+          opts = {
+            url: "/images",
+            paramName: "images",
+            dataType: "text"
           };
-        })(this));
-        opts = {
-          url: "/images",
-          paramName: "images",
-          dataType: "text"
-        };
-        this.XHR = new YAFU.XHR(opts);
-        this.XHR.send(this.fileInput.files());
-        options = jQuery.ajax.args[0][0];
-        _results = [];
-        for (key in opts) {
-          value = opts[key];
-          _results.push(expect(options[key]).to.eq(value));
-        }
-        return _results;
-      });
+          this.XHR = new YAFU.XHR(opts);
+          this.XHR.send(this.fileInput.files());
+          options = jQuery.ajax.args[0][0];
+          _results = [];
+          for (key in opts) {
+            value = opts[key];
+            _results.push(expect(options[key]).to.eq(value));
+          }
+          return _results;
+        });
+      }
     });
     describe('with HTML5 files property', function() {
-      beforeEach(function() {
-        this.files = [blob1, blob2];
-        sinon.stub(jQuery, "prop", (function(_this) {
-          return function() {
-            return _this.files;
-          };
-        })(this));
-        return this.XHR.send(this.fileInput.files());
-      });
-      it('calls $.ajax with default options', function() {
-        var key, options, value, _ref, _results;
-        expect(jQuery.prop).to.have.been.calledOnce;
-        options = jQuery.ajax.args[0][0];
-        _ref = this.XHR["default"];
-        _results = [];
-        for (key in _ref) {
-          value = _ref[key];
-          _results.push(expect(options[key]).to.eq(value));
-        }
-        return _results;
-      });
-      return it('calls $.ajax with some formData', function() {
-        return expect(jQuery.ajax.args[0][0].data).to.be.an.instanceOf(FormData);
-      });
+      if (typeof Blob === 'function') {
+        beforeEach(function() {
+          var blob1, blob2;
+          blob1 = new Blob;
+          blob1.name = "file1.jpg";
+          blob2 = new Blob;
+          blob2.name = "file2.jpg";
+          this.files = [blob1, blob2];
+          sinon.stub(jQuery, "prop", (function(_this) {
+            return function() {
+              return _this.files;
+            };
+          })(this));
+          return this.XHR.send(this.fileInput.files());
+        });
+        it('calls $.ajax with default options', function() {
+          var key, options, value, _ref, _results;
+          expect(jQuery.prop).to.have.been.calledOnce;
+          options = jQuery.ajax.args[0][0];
+          _ref = this.XHR["default"];
+          _results = [];
+          for (key in _ref) {
+            value = _ref[key];
+            _results.push(expect(options[key]).to.eq(value));
+          }
+          return _results;
+        });
+        return it('calls $.ajax with some formData', function() {
+          return expect(jQuery.ajax.args[0][0].data).to.be.an.instanceOf(FormData);
+        });
+      }
     });
     return describe('without HTML5 files property ie. old browser', function() {
       beforeEach(function() {
