@@ -6,6 +6,9 @@ class @YAFU.FileInput
     @initInput()
 
   initInput: ->
+    #Safari has a strange behavior with multiple file input
+    if @fileInput.multiple and not FileReader?
+      @fileInput.removeAttribute 'multiple'
     @$fileInput = $(@fileInput)
     @$fileInput.on 'change', =>
       @_files = null

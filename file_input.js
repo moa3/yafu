@@ -10,6 +10,9 @@
     }
 
     FileInput.prototype.initInput = function() {
+      if (this.fileInput.multiple && (typeof FileReader === "undefined" || FileReader === null)) {
+        this.fileInput.removeAttribute('multiple');
+      }
       this.$fileInput = $(this.fileInput);
       return this.$fileInput.on('change', (function(_this) {
         return function() {
