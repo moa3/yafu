@@ -5,15 +5,19 @@ Should work with the last versions of Chrome and Firefox and IE >= 9
 
 ## Usage
 
-  bower install moa3/yafu
+``` shell
+bower install moa3/yafu
+```
 
-yafu deps :
+## Dependencies :
 
-  jquery, [iframe-transport](https://raw.github.com/blueimp/jQuery-File-Upload/master/js/jquery.iframe-transport.js), underscorejs 
+ * jquery
+ * [iframe-transport](https://raw.github.com/blueimp/jQuery-File-Upload/master/js/jquery.iframe-transport.js)
+ * underscorejs
 
 ### Exemple
 
-see exemple folder
+see [exemple folder](https://github.com/moa3/yafu/tree/master/exemple)
 
 ## Credits
 
