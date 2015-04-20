@@ -1,5 +1,5 @@
 (function() {
-  var addXhrProgressEvent;
+  var IframeFormData, addXhrProgressEvent;
 
   if (this.YAFU == null) {
     this.YAFU = {};
@@ -25,6 +25,26 @@
       }
     });
   })(jQuery);
+
+  IframeFormData = (function() {
+    function IframeFormData() {
+      this._data = [];
+    }
+
+    IframeFormData.prototype.append = function(name, value) {
+      return this._data.push({
+        name: name,
+        value: value
+      });
+    };
+
+    IframeFormData.prototype.value = function() {
+      return this._data;
+    };
+
+    return IframeFormData;
+
+  })();
 
   this.YAFU.XHR = (function() {
     XHR.prototype["default"] = function() {
@@ -65,30 +85,34 @@
 
     XHR.prototype.dataOptions = function(files, datas, deferred) {
       if (_(files[0]).has('input')) {
+        this.formData = new IframeFormData();
         return this.iframeOptions(files, deferred);
       } else {
+        this.formData = new FormData();
         return this.XHROptions(files, datas, deferred);
       }
     };
 
     XHR.prototype.XHROptions = function(files, datas, deferred) {
-      var data, file, formData, name, options, value, _i, _j, _len, _len1;
-      formData = new FormData();
+      var data, file, name, options, value, _i, _j, _len, _len1;
       for (_i = 0, _len = files.length; _i < _len; _i++) {
         file = files[_i];
         if (file instanceof File) {
-          formData.append(this.options.paramName, file, file.uploadName || file.name);
+          this.formData.append(this.options.paramName, file, file.uploadName || file.name);
         }
       }
       for (_j = 0, _len1 = datas.length; _j < _len1; _j++) {
         data = datas[_j];
         for (name in data) {
           value = data[name];
-          formData.append("" + this.options.paramName + "[" + name + "]", value);
+          this.formData.append("" + this.options.paramName + "[" + name + "]", value);
         }
       }
+      if (this.options.data) {
+        this.handleData(this.options.data);
+      }
       return options = {
-        data: formData,
+        data: this.formData,
         processData: false,
         contentType: false,
         success: deferred.resolve,
@@ -103,14 +127,40 @@
 
     XHR.prototype.iframeOptions = function(files, deferred) {
       var options;
+      if (this.options.data) {
+        this.handleData(this.options.data);
+      }
       return options = {
         dataType: "iframe " + this.options.dataType,
         fileInput: $(_(files).map(function(f) {
           return f.input;
         })),
+        formData: this.formData.value(),
         success: deferred.resolve,
         error: deferred.reject
       };
+    };
+
+    XHR.prototype.handleData = function(data) {
+      var name, v, value, _results;
+      _results = [];
+      for (name in data) {
+        value = data[name];
+        if (_(value).isArray()) {
+          _results.push((function() {
+            var _i, _len, _results1;
+            _results1 = [];
+            for (_i = 0, _len = value.length; _i < _len; _i++) {
+              v = value[_i];
+              _results1.push(this.formData.append("" + name + "[]", v));
+            }
+            return _results1;
+          }).call(this));
+        } else {
+          _results.push(this.formData.append(name, value));
+        }
+      }
+      return _results;
     };
 
     return XHR;
