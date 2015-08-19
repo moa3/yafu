@@ -10,7 +10,8 @@
   "directories": {
     "test": "test"
   },
-  "dependencies": {
+  "devDependencies": {
+    "mocha": "~1.18.2"
     "chai": "~1.9.0",
     "grunt": "~0.4.4",
     "grunt-bower-task": "~0.3.4",
@@ -21,9 +22,6 @@
     "grunt-mocha": "~0.4.10",
     "sinon": "~1.9.0",
     "sinon-chai": "~2.5.0"
-  },
-  "devDependencies": {
-    "mocha": "~1.18.2"
   },
   "scripts": {
     "test": "grunt"
