@@ -10,6 +10,11 @@
   "directories": {
     "test": "test"
   },
+  "dependencies": {
+    "jquery-file-upload": "~9.5.7",
+    "jquery": "~2.1.0",
+    "lodash": "~2.4.1"
+  },
   "devDependencies": {
     "mocha": "~1.18.2",
     "chai": "~1.9.0",
