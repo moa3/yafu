@@ -1,6 +1,6 @@
 {
   "name": "yafu",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "uploader polyfill",
   "repository": {
     "type": "git",
@@ -31,9 +31,6 @@
   },
   "scripts": {
     "test": "grunt"
-  },
-  "browser": {
-    "yafu": "./yafu.js"
   },
   "author": "moa3",
   "license": "MIT"

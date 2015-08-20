@@ -11088,7 +11088,7 @@ $ = jQuery = require("jquery");
 
 _ = require('underscore');
 
-YAFU = require('yafu');
+YAFU = require('../yafu');
 
 describe('XHR', function() {
   beforeEach(function() {
@@ -11232,7 +11232,7 @@ describe('XHR', function() {
 });
 
 
-},{"jquery":3,"underscore":4,"yafu":7}],6:[function(require,module,exports){
+},{"../yafu":7,"jquery":3,"underscore":4}],6:[function(require,module,exports){
 var $, IframeFormData, XHR, _, addXhrProgressEvent, jQuery;
 
 $ = jQuery = require("jquery");

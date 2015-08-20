@@ -1,6 +1,6 @@
 $ = jQuery = require "jquery"
 _ = require 'underscore'
-YAFU = require 'yafu'
+YAFU = require '../yafu'
 
 describe 'XHR', ->
 
