@@ -1,3 +1,5 @@
+$ = jQuery = require "jquery"
+_ = require 'underscore'
 YAFU = require 'yafu'
 
 describe 'FileInput', ->

@@ -33,7 +33,7 @@ module.exports = (grunt)->
         options:
           browserifyOptions:
             standalone: 'yafu'
-          external: ['jquery', 'lodash']
+          external: ['jquery', 'underscore']
           transform: ['coffeeify']
       test:
         files:

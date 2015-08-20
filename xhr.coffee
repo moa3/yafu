@@ -1,4 +1,5 @@
 $ = jQuery = require "jquery"
+_ = require 'underscore'
 
 (addXhrProgressEvent = ($) ->
   originalXhr = $.ajaxSettings.xhr

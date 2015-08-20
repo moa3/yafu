@@ -1,19 +1,19 @@
 {
   "name": "yafu",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "description": "uploader polyfill",
   "repository": {
     "type": "git",
     "url": "https://github.com/moa3/yafu.git"
   },
-  "main": "xhr.js",
+  "main": "yafu.js",
   "directories": {
     "test": "test"
   },
   "dependencies": {
     "blueimp-file-upload": "^9.5.7",
     "jquery": "~2.1.0",
-    "lodash": "~2.4.1"
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
     "mocha": "~1.18.2",

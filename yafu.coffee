@@ -1,5 +1,5 @@
 YAFU =
-  XHR: require './xhr'
-  FileInput: require './file_input'
+  XHR: require './xhr.coffee'
+  FileInput: require './file_input.coffee'
 
 module.exports = YAFU
