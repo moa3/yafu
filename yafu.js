@@ -242,12 +242,12 @@ module.exports = XHR = (function() {
 var YAFU;
 
 YAFU = {
-  XHR: require('./xhr.coffee'),
-  FileInput: require('./file_input.coffee')
+  XHR: require('./xhr'),
+  FileInput: require('./file_input')
 };
 
 module.exports = YAFU;
 
 
-},{"./file_input.coffee":1,"./xhr.coffee":2}]},{},[3])(3)
+},{"./file_input":1,"./xhr":2}]},{},[3])(3)
 });

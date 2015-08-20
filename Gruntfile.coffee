@@ -33,6 +33,7 @@ module.exports = (grunt)->
         options:
           browserifyOptions:
             standalone: 'yafu'
+            extensions: '.coffee'
           external: ['jquery', 'underscore']
           transform: ['coffeeify']
       test:
@@ -40,6 +41,8 @@ module.exports = (grunt)->
           'test/xhr_spec.js': ['test/xhr_spec.coffee']
           'test/file_input_spec.js': ['test/file_input_spec.coffee']
         options:
+          browserifyOptions:
+            extensions: '.coffee'
           transform: ['coffeeify']
     mocha:
       options:

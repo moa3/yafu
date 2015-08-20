@@ -11397,14 +11397,14 @@ module.exports = XHR = (function() {
 var YAFU;
 
 YAFU = {
-  XHR: require('./xhr.coffee'),
-  FileInput: require('./file_input.coffee')
+  XHR: require('./xhr'),
+  FileInput: require('./file_input')
 };
 
 module.exports = YAFU;
 
 
-},{"./file_input.coffee":1,"./xhr.coffee":2}]},{},[3])(3)
+},{"./file_input":1,"./xhr":2}]},{},[3])(3)
 });
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./file_input.coffee":1,"./xhr.coffee":5,"jquery":2,"underscore":3}]},{},[4]);
+},{"./file_input":1,"./xhr":5,"jquery":2,"underscore":3}]},{},[4]);
