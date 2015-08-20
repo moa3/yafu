@@ -1,5 +1,6 @@
 $ = jQuery = require "jquery"
 _ = require 'underscore'
+require './jquery.iframe-transport'
 
 (addXhrProgressEvent = ($) ->
   originalXhr = $.ajaxSettings.xhr
