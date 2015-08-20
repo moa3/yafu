@@ -165,8 +165,6 @@ jQuery = require('jquery');
 (function($, undefined) {
   "use strict";
 
-  $.BORDEL_DE_MERDE = "COUCOU"
-
   // Register a prefilter that checks whether the `iframe` option is set, and
   // switches to the "iframe" data type if it is `true`.
   $.ajaxPrefilter(function(options, origOptions, jqXHR) {
@@ -11574,8 +11572,6 @@ jQuery = require('jquery');
 
 (function($, undefined) {
   "use strict";
-
-  $.BORDEL_DE_MERDE = "COUCOU"
 
   // Register a prefilter that checks whether the `iframe` option is set, and
   // switches to the "iframe" data type if it is `true`.
