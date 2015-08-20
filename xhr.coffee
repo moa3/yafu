@@ -1,4 +1,5 @@
-@YAFU ?= {}
+$ = jQuery = require "jquery"
+
 (addXhrProgressEvent = ($) ->
   originalXhr = $.ajaxSettings.xhr
   $.ajaxSetup
@@ -24,7 +25,7 @@ class IframeFormData
 
   value: -> @_data
 
-class @YAFU.XHR
+module.exports = class XHR
 
   default: ->
     url: "/"

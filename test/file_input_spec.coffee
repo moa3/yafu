@@ -1,3 +1,5 @@
+YAFU = require 'yafu'
+
 describe 'FileInput', ->
 
   beforeEach ->

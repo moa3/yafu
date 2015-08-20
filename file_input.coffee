@@ -1,6 +1,5 @@
-@YAFU ?= {}
 
-class @YAFU.FileInput
+module.exports = class FileInput
 
   constructor: (@fileInput)->
     @initInput()

@@ -1,3 +1,5 @@
+$ = require "jquery"
+YAFU = require 'yafu'
 
 describe 'XHR', ->
 

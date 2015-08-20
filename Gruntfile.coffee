@@ -5,7 +5,7 @@ module.exports = (grunt)->
   grunt.loadNpmTasks 'grunt-contrib-jshint'
   grunt.loadNpmTasks 'grunt-coffeelint'
   grunt.loadNpmTasks 'grunt-mocha'
-  grunt.loadNpmTasks 'grunt-bower-task'
+  grunt.loadNpmTasks 'grunt-browserify'
 
   grunt.initConfig
     coffeelint:
@@ -15,6 +15,7 @@ module.exports = (grunt)->
             'Gruntfile.coffee'
             'file_input.coffee'
             'xhr.coffee'
+            'yafu.coffee'
             'test/**/*.coffee'
             ]
         options:
@@ -24,16 +25,22 @@ module.exports = (grunt)->
             level: 'warn'
     jshint:
       manifest: ['*.json']
-    coffee:
+    browserify:
       assets:
         files:
-          'file_input.js': ['file_input.coffee']
-          'xhr.js': ['xhr.coffee']
+          'yafu.js': ['yafu.coffee']
           'exemple/exemple.js': ['exemple/exemple.coffee']
+        options:
+          browserifyOptions:
+            standalone: 'yafu'
+          external: ['jquery', 'lodash']
+          transform: ['coffeeify']
       test:
         files:
           'test/xhr_spec.js': ['test/xhr_spec.coffee']
           'test/file_input_spec.js': ['test/file_input_spec.coffee']
+        options:
+          transform: ['coffeeify']
     mocha:
       options:
         run: true
@@ -43,15 +50,10 @@ module.exports = (grunt)->
     watch:
       files: ['*.coffee', 'test/**/*.coffee', 'exemple/**/*.coffee']
       tasks: ['coffeelint', 'coffee','mocha']
-    bower:
-      install:
-        targetDir: 'bower_components'
-        copy: no
 
   grunt.registerTask 'default', [
-    'bower'
     'jshint'
     'coffeelint'
-    'coffee'
+    'browserify'
     'mocha'
     ]
