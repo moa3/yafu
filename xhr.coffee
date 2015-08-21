@@ -27,7 +27,7 @@ class IframeFormData
 
   value: -> @_data
 
-module.exports = class XHR
+class XHR
 
   default: ->
     url: "/"
@@ -92,3 +92,5 @@ module.exports = class XHR
           @formData.append "#{name}[]", v
       else
         @formData.append name, value
+
+module.exports = XHR

@@ -44,6 +44,12 @@ module.exports = (grunt)->
           browserifyOptions:
             extensions: '.coffee'
           transform: ['coffeeify']
+    coffee:
+      assets:
+        files:
+          'build/file_input.js': ['file_input.coffee']
+          'build/xhr.js': ['xhr.coffee']
+          'build/yafu.js': ['yafu.coffee']
     mocha:
       options:
         run: true
@@ -57,6 +63,7 @@ module.exports = (grunt)->
   grunt.registerTask 'default', [
     'jshint'
     'coffeelint'
+    'coffee'
     'browserify'
     'mocha'
     ]

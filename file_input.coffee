@@ -1,7 +1,7 @@
 $ = jQuery = require "jquery"
 _ = require 'underscore'
 
-module.exports = class FileInput
+class FileInput
 
   constructor: (@fileInput)->
     @initInput()
@@ -54,3 +54,5 @@ module.exports = class FileInput
     @fileInput = inputClone[0]
     @initInput()
     old
+
+module.exports = FileInput

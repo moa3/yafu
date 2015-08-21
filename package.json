@@ -1,12 +1,12 @@
 {
   "name": "yafu",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "uploader polyfill",
   "repository": {
     "type": "git",
     "url": "https://github.com/moa3/yafu.git"
   },
-  "main": "yafu.js",
+  "main": "build/yafu",
   "directories": {
     "test": "test"
   },

@@ -5,6 +5,7 @@ YAFU = require '../yafu'
 describe 'XHR', ->
 
   beforeEach ->
+    debugger
     $input = $('<input>', type: 'file')
     @fileInput = new YAFU.FileInput $input[0]
     @originalInput = @fileInput.$fileInput
